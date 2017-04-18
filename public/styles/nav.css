@@ -1,0 +1,21 @@
+nav {
+  background-color: #00a087;
+  position: fixed;
+  padding: 0 2em;
+  width: 100%;
+  height: 80px
+}
+
+nav .header {
+  float: left;
+  font-size: 2em;
+  color: #E8FDFF;
+  padding-left: 10px;
+  line-height: 80px;
+}
+
+nav .logo {
+  float: left;
+  height: 80px;
+  width: 80px;
+}
