@@ -11,7 +11,7 @@ nav .header {
   float: left;
   font-size: 2em;
   color: #E8FDFF;
-  padding-left: 10px;
+  padding: 0 10px;
   line-height: 80px;
 }
 
@@ -19,4 +19,27 @@ nav .logo {
   float: left;
   height: 80px;
   width: 80px;
+}
+
+nav a {
+  padding: 15px 10px;
+  float: right;
+  margin: 10px 0;
+  background-color: #E8FDFF;
+  color: #00a087;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+nav a:hover {
+  background-color: white;
+  color: black;
+}
+
+.compose-icon {
+  width: 22px;
+  height: 22px;
+  padding-right: 5px;
 }
