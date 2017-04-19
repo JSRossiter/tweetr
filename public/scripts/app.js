@@ -13,10 +13,10 @@ function createTweetElement (input) {
   $header.append($avatar, $poster, $handle);
 
   const $div = $("<div>").addClass("tweet-content").text(input.content.text);
-
+  console.log((Date.now() - input.created_at));
   const ageMinutes = Math.floor((Date.now() - input.created_at) / (1000 * 60));
   let ageStatement = "";
-  if (ageMinutes === 0) {
+  if (ageMinutes <= 0) {
     ageStatement = "Just now";
   } else if (ageMinutes < 60) {
     ageStatement = `${ageMinutes} minutes ago`;
@@ -40,6 +40,7 @@ function createTweetElement (input) {
 }
 
 function renderTweets (tweets) {
+  $("article").remove();
   for (var i = 0; i < tweets.length; i++) {
     $("#tweets-container").prepend(createTweetElement(tweets[i]));
   }
@@ -65,19 +66,19 @@ function loadTweets () {
 
 function postTweet (event) {
   event.preventDefault();
-  const tweet = $("textarea[name='text']");
-  if (!tweet[0].value) {
+  const $tweet = $("textarea[name='text']");
+  if (!$tweet[0].value) {
     flashMessage("You didn't type anything!");
-  } else if (tweet[0].value.length > 140) {
+  } else if ($tweet[0].value.length > 140) {
     flashMessage("Your tweet is too long!");
   } else {
     $.ajax({
       url: "/tweets/",
       method: "POST",
-      data: tweet.serialize(),
+      data: $tweet.serialize(),
       success: function () {
         loadTweets();
-        tweet[0].value = "";
+        $tweet[0].value = "";
       }
     });
   }
@@ -90,9 +91,7 @@ function composeButton (event) {
       $(".new-tweet textarea").focus();
     }
   });
-
 }
-
 
 $(document).ready(function() {
   loadTweets();
