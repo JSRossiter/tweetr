@@ -22,12 +22,24 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    likeTweet: function(tweetId, val, callback) {
+    likeTweet: function(tweetId, handle, callback) {
       db.collection("tweets").updateOne(
-        { _id: new ObjectId("58f6836f169b4f6606ed4c3e") },
-        { $inc: { likes: Number(val) } }
+        { id: Number(tweetId) },
+        { $addToSet: { likes: handle } }
       );
       callback(null, true);
+    },
+
+    unlikeTweet: function(tweetId, handle, callback) {
+      db.collection("tweets").updateOne(
+        { id: Number(tweetId) },
+        { $pullAll: { likes: [handle] } }
+      );
+      callback(null, true);
+    },
+
+    getLikedTweets: function(handle) {
+      db.collection("tweets").find({ "likes": handle })
     }
   };
 }

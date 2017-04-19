@@ -5,7 +5,7 @@
  */
 
 function createTweetElement (input) {
-  const $tweet = $("<article>");
+  const $tweet = $("<article>").data("tweet-id", input.id);
   const $header = $("<header>");
   const $avatar = $("<img>").addClass("avatar").attr("src", input.user.avatars.small);
   const $poster = $("<h2>").text(input.user.name);
@@ -28,9 +28,15 @@ function createTweetElement (input) {
   const $footer = $("<footer>");
   const $age = $("<p>").text(ageStatement);
   const $icons = $("<ul>").addClass("tweet-icons");
-  const $flag = $("<li>").append($("<img>").attr("src", "images/flag.png"));
-  const $retweet = $("<li>").append($("<img>").attr("src", "images/retweet.png"));
-  const $heart = $("<li>").append($("<img>").attr("src", "images/heart.svg").addClass("like-btn").click(likeButton));
+  const $flag = $("<li>").append($('<i class="fa fa-flag"></i> '));
+  const $retweet = $("<li>").append($('<i class="fa fa-retweet"></i> '));
+  const $heart = $("<li>").append($('<i class="fa fa-heart like-btn"></i>')).click(likeButton);
+  // TODO replace jeff with user
+  if (input.likes.find((element) => {
+    return element === "jeff";
+  })) {
+    $heart.addClass("liked");
+  }
   $icons.append($flag, $retweet, $heart);
   $footer.append($age, $icons);
 
@@ -93,19 +99,19 @@ function composeButton (event) {
 }
 
 function likeButton (event) {
-  console.log("called");
-  console.log(this);
-  const val = $(this).hasClass("liked") ? -1 : 1;
+  const val = $(this).hasClass("liked") ? "" : 1;;
   const liked = () => {
     $(this).toggleClass("liked");
   }
+  const tweetId = $(this).closest("article").data("tweet-id");
   $.ajax({
     url: "/tweets/",
     method: "PUT",
     data: {
       like: {
-        id: "58f6836f169b4f6606ed4c3e",
-        val: val
+        like: val,
+        id: tweetId,
+        handle: "jeff"
       }
     },
     success: liked
