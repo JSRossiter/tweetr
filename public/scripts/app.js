@@ -13,7 +13,6 @@ function createTweetElement (input) {
   $header.append($avatar, $poster, $handle);
 
   const $div = $("<div>").addClass("tweet-content").text(input.content.text);
-  console.log((Date.now() - input.created_at));
   const ageMinutes = Math.floor((Date.now() - input.created_at) / (1000 * 60));
   let ageStatement = "";
   if (ageMinutes <= 0) {
@@ -31,7 +30,7 @@ function createTweetElement (input) {
   const $icons = $("<ul>").addClass("tweet-icons");
   const $flag = $("<li>").append($("<img>").attr("src", "images/flag.png"));
   const $retweet = $("<li>").append($("<img>").attr("src", "images/retweet.png"));
-  const $heart = $("<li>").append($("<img>").attr("src", "images/heart.svg"));
+  const $heart = $("<li>").append($("<img>").attr("src", "images/heart.svg").addClass("like-btn").click(likeButton));
   $icons.append($flag, $retweet, $heart);
   $footer.append($age, $icons);
 
@@ -90,6 +89,26 @@ function composeButton (event) {
     if (!$(".new-tweet").is(":hidden")) {
       $(".new-tweet textarea").focus();
     }
+  });
+}
+
+function likeButton (event) {
+  console.log("called");
+  console.log(this);
+  const val = $(this).hasClass("liked") ? -1 : 1;
+  const liked = () => {
+    $(this).toggleClass("liked");
+  }
+  $.ajax({
+    url: "/tweets/",
+    method: "PUT",
+    data: {
+      like: {
+        id: "58f6836f169b4f6606ed4c3e",
+        val: val
+      }
+    },
+    success: liked
   });
 }
 

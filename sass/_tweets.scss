@@ -45,7 +45,9 @@ header {
   li {
     float: left;
   }
-
+  &.liked {
+    opacity: 1;
+  }
 }
 
 .tweet-content {

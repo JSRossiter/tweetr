@@ -137,6 +137,8 @@ header {
     margin: 0 3px; }
   .tweet-icons li {
     float: left; }
+  .tweet-icons.liked {
+    opacity: 1; }
 
 .tweet-content {
   padding: 2em 1em; }
