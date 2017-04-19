@@ -3,10 +3,9 @@
   font-size: 0.8em;
   font-style: italic;
   padding: 0.5em;
-}
-
-.counter.invalid {
-  color: red;
+  &.invalid {
+    color: red;
+  }
 }
 
 section {
@@ -15,11 +14,10 @@ section {
   margin: 0 2em;
   border-radius: 5px;
   padding: 10px;
-}
-
-section h2 {
-  border-bottom: 1px solid black;
-  margin: 0;
+  h2 {
+    border-bottom: 1px solid black;
+    margin: 0;
+  }
 }
 
 textarea {
