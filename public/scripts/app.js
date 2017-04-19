@@ -31,13 +31,14 @@ function createTweetElement (input) {
   const $flag = $("<li>").append($('<i class="fa fa-flag"></i> '));
   const $retweet = $("<li>").append($('<i class="fa fa-retweet"></i> '));
   const $heart = $("<li>").append($('<i class="fa fa-heart like-btn"></i>')).click(likeButton);
+  const $likes = $("<li>").addClass("like-count").text(input.likes.length);
   // TODO replace jeff with user
   if (input.likes.find((element) => {
     return element === "jeff";
   })) {
     $heart.addClass("liked");
   }
-  $icons.append($flag, $retweet, $heart);
+  $icons.append($flag, $retweet, $heart, $likes);
   $footer.append($age, $icons);
 
   $tweet.append($header, $div, $footer);
@@ -99,9 +100,17 @@ function composeButton (event) {
 }
 
 function likeButton (event) {
-  const val = $(this).hasClass("liked") ? "" : 1;;
+  const val = $(this).hasClass("liked") ? "" : 1;
   const liked = () => {
     $(this).toggleClass("liked");
+    let newLikes;
+    const $counter = $(this).siblings(".like-count");
+    if ($(this).hasClass("liked")) {
+      newLikes = parseInt($counter.text(), 10) + 1;
+    } else {
+      newLikes = parseInt($counter.text(), 10) - 1;
+    }
+    $counter.text(newLikes);
   }
   const tweetId = $(this).closest("article").data("tweet-id");
   $.ajax({
