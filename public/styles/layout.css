@@ -39,6 +39,10 @@ main.container {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+@media (max-width: 600px) {
+  main.container {
+    width: 100%;
+    padding-top: 80px; } }
 nav {
   background-color: #00a087;
   position: fixed;
@@ -70,11 +74,15 @@ nav {
     background-color: white;
     color: black; }
 
-.compose-icon {
-  width: 22px;
-  height: 22px;
-  padding-right: 5px; }
+@media (max-width: 600px) {
+  .compose-text {
+    display: none; }
 
+  nav a {
+    padding: 4px 3px 0 8px;
+    margin: 16px 0;
+    font-size: 36px;
+    border-radius: 10px; } }
 .counter {
   float: right;
   font-size: 0.8em;
@@ -98,6 +106,10 @@ textarea {
   margin-top: 1em;
   padding: 5px; }
 
+@media (max-width: 600px) {
+  section {
+    margin: 0;
+    border-radius: 0; } }
 footer {
   overflow: hidden;
   border-top: 1px solid #EEEEEE;
@@ -153,5 +165,17 @@ header {
   transition: opacity 0.2s ease-in-out; }
   #tweets-container article:hover, #tweets-container article:hover .tweet-icons li {
     opacity: 1; }
+
+@media (max-width: 600px) {
+  #tweets-container article {
+    margin: 0;
+    opacity: 1;
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+    border-bottom: none; }
+
+  .tweet-icons li {
+    opacity: 1; } }
 
 /*# sourceMappingURL=layout.css.map */

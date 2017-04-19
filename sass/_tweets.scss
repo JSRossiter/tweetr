@@ -66,3 +66,17 @@ header {
     opacity: 1;
   }
 }
+
+@media (max-width: 600px) {
+  #tweets-container article {
+    margin: 0;
+    opacity: 1;
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+  }
+  .tweet-icons li {
+    opacity: 1;
+  }
+}

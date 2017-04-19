@@ -47,6 +47,19 @@ main.container {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
+@media (max-width: 600px) {
+  main.container {
+    width: 100%;
+    padding-top: 80px;
+  }
+}
+
+
+
+
+
+
+
 
 @import "nav";
 @import "new-tweets";
