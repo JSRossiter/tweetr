@@ -63,9 +63,7 @@ function createTweetElement (input) {
   const $retweet = $("<li>").append($('<i class="fa fa-retweet"></i> '));
   const $heart = $("<li>").append($('<i class="fa fa-heart like-btn"></i>')).click(likeButton);
   const $likes = $("<li>").addClass("like-count").text(input.likes.length);
-  // TODO replace jeff with user
   if (input.likes.find((element) => {
-    console.log(element, $.data(document.body, "handle"));
     return element === $.data(document.body, "handle");
   })) {
     $heart.addClass("liked");
@@ -102,7 +100,6 @@ function checkLogin () {
 }
 
 function renderTweets (tweets) {
-  $("article").remove();
   for (var i = 0; i < tweets.length; i++) {
     $("#tweets-container").prepend(createTweetElement(tweets[i]));
   }
@@ -122,7 +119,10 @@ function loadTweets () {
   $.ajax({
     url: "/tweets/",
     method: 'GET',
-    success: renderTweets
+    success: (data) => {
+      $("article").remove();
+      renderTweets(data);
+    }
   });
 }
 
@@ -138,9 +138,11 @@ function postTweet (event) {
       url: "/tweets/",
       method: "POST",
       data: $tweet.serialize(),
-      success: function () {
-        loadTweets();
+      success: function (data) {
+        renderTweets([data]);
+        // loadTweets();
         $tweet[0].value = "";
+        $(".counter").text(140);
       }
     });
   }
