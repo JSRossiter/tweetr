@@ -7,8 +7,8 @@ function logoutButton (event) {
       $(".logout").toggle(() => {
         $(".login, .register").toggle();
       });
-      $(".logged-in-label").text("");
-      $(".compose, .logged-in").toggle();
+      $(".logged-in-label, .logged-in").text("");
+      $(".compose").toggle();
       $(".liked").removeClass("liked");
       $.data(document.body, "handle", null);
 

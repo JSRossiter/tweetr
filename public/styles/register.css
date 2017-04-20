@@ -88,8 +88,6 @@ nav {
     color: black; }
   nav .compose, nav .logout {
     display: none; }
-  nav .logged-in {
-    display: none; }
   nav .logged-in, nav .logged-in-label {
     font-size: 1.3em;
     color: #E8FDFF;

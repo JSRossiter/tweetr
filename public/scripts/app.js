@@ -54,7 +54,7 @@ function checkLogin () {
       if (data) {
         $("nav a").toggle(0);
         $(".logged-in-label").text("Logged in as");
-        $(".logged-in").text(data).toggle(0);
+        $(".logged-in").text(data);
         $.data(document.body, "handle", data);
       }
     },
