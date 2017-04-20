@@ -53,7 +53,16 @@ fieldset {
 @media (max-width: 768px) {
   main.container {
     width: 100%;
-    padding-top: 80px; } }
+    padding-top: 80px; }
+
+  fieldset {
+    width: 100%; }
+
+  input[type="text"], input[type="password"] {
+    width: 60%; }
+
+  label {
+    width: 90%; } }
 nav {
   background-color: #00a087;
   position: fixed;

@@ -63,6 +63,15 @@ fieldset{
     width: 100%;
     padding-top: 80px;
   }
+  fieldset {
+    width: 100%;
+  }
+  input[type="text"], input[type="password"] {
+    width: 60%;
+  }
+  label {
+    width: 90%;
+  }
 }
 
 @import "nav";
