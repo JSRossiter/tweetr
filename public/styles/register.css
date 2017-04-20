@@ -98,7 +98,7 @@ nav {
     padding-left: 3px; }
 
 @media (max-width: 768px) {
-  .nav-btn-text {
+  .nav-btn-text, .logged-in {
     display: none; }
 
   nav {
