@@ -43,7 +43,7 @@ module.exports = function makeDataHelpers(db) {
           return cb(err);
         }
         cb(null, tweets);
-      })
+      });
     }
   };
-}
+};

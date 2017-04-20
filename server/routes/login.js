@@ -10,9 +10,9 @@ module.exports = function(UserHelpers) {
       req.app.locals.user = user;
       req.session.handle = req.app.locals.user.handle;
       res.redirect("/");
-    }
+    };
     UserHelpers.createUser(req.body.name, `@${req.body.handle}`, req.body.password, login);
-  })
+  });
 
   loginRoutes.post("/login", function(req, res) {
     const login = (err, user) => {
@@ -23,7 +23,7 @@ module.exports = function(UserHelpers) {
         req.session.handle = req.app.locals.user.handle;
         res.redirect("/");
       }
-    }
+    };
     UserHelpers.authenticate(`@${req.body.handle}`, req.body.password, login);
   });
 
@@ -36,7 +36,7 @@ module.exports = function(UserHelpers) {
           req.app.locals.user = user;
           res.status(200).send(user.handle);
         }
-      })
+      });
     } else {
       res.status(200);
     }
@@ -47,4 +47,4 @@ module.exports = function(UserHelpers) {
     res.status(200).send();
   });
   return loginRoutes;
-}
+};

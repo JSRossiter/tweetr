@@ -4,6 +4,37 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+function likeButton (event) {
+  const poster = $(this).closest("article").find("p").first().text();
+  if ($.data(document.body, "handle") && poster !== $.data(document.body, "handle")) {
+    const val = $(this).hasClass("liked") ? "" : 1;
+    const liked = () => {
+      $(this).toggleClass("liked");
+      let newLikes;
+      const $counter = $(this).siblings(".like-count");
+      if ($(this).hasClass("liked")) {
+        newLikes = parseInt($counter.text(), 10) + 1;
+      } else {
+        newLikes = parseInt($counter.text(), 10) - 1;
+      }
+      $counter.text(newLikes);
+    };
+    const tweetId = $(this).closest("article").data("tweet-id");
+    $.ajax({
+      url: "/tweets/",
+      method: "PUT",
+      data: {
+        like: {
+          like: val,
+          id: tweetId,
+          handle: "jeff"
+        }
+      },
+      success: liked
+    });
+  }
+}
+
 function createTweetElement (input) {
   const $tweet = $("<article>").data("tweet-id", input.id);
   const $header = $("<header>");
@@ -62,9 +93,9 @@ function checkLogin () {
       // logout
       $.ajax({
         url: "/logout",
-        method: "POST",
-        success: function () {
-        }
+        method: "POST"
+        // success: function () {
+        // }
       });
     }
   });
@@ -122,37 +153,6 @@ function composeButton (event) {
       $(".new-tweet textarea").focus();
     }
   });
-}
-
-function likeButton (event) {
-  const poster = $(this).closest("article").find("p").first().text()
-  if ($.data(document.body, "handle") && poster !== $.data(document.body, "handle")) {
-    const val = $(this).hasClass("liked") ? "" : 1;
-    const liked = () => {
-      $(this).toggleClass("liked");
-      let newLikes;
-      const $counter = $(this).siblings(".like-count");
-      if ($(this).hasClass("liked")) {
-        newLikes = parseInt($counter.text(), 10) + 1;
-      } else {
-        newLikes = parseInt($counter.text(), 10) - 1;
-      }
-      $counter.text(newLikes);
-    }
-    const tweetId = $(this).closest("article").data("tweet-id");
-    $.ajax({
-      url: "/tweets/",
-      method: "PUT",
-      data: {
-        like: {
-          like: val,
-          id: tweetId,
-          handle: "jeff"
-        }
-      },
-      success: liked
-    });
-  }
 }
 
 $(document).ready(function() {

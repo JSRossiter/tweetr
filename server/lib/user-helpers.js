@@ -6,13 +6,16 @@ const {generateAvatars} = require('./util/avatar-helper');
 module.exports = function makeUserHelpers(db) {
   return {
     getUser: (handle, cb) => {
-      db.collection("users").find({ "user.handle": handle }).limit(1).next((err, user) => {
-        if (user) {
-          cb(null, user.user);
-        } else {
-          cb("user doesn't exist");
-        }
-      })
+      db.collection("users")
+        .find({ "user.handle": new RegExp(handle, "i") })
+        .limit(1)
+        .next((err, user) => {
+          if (user) {
+            cb(null, user.user);
+          } else {
+            cb("user doesn't exist");
+          }
+        });
     },
     createUser: (name, handle, password, cb) => {
       db.collection("users").updateOne(
@@ -23,28 +26,31 @@ module.exports = function makeUserHelpers(db) {
         name: name,
         handle: handle,
         avatars: generateAvatars(handle)
-      }
-      db.collection("users").find({ currentUserId: { $exists: true } }).limit(1).next((err, userID) => {
-        db.collection("users").insertOne({
-          user: user,
-          password: bcrypt.hashSync(password, 10),
-          id:  userID,
-          userSince: Date.now()
+      };
+      db.collection("users")
+        .find({ currentUserId: { $exists: true } })
+        .limit(1)
+        .next((err, userID) => {
+          db.collection("users").insertOne({
+            user: user,
+            password: bcrypt.hashSync(password, 10),
+            id: userID,
+            userSince: Date.now()
+          });
+          cb(null, user);
         });
-        cb(null, user);
-      });
     },
-
     authenticate: (handle, password, cb) => {
-      db.collection("users").find({ "user.handle": handle }).limit(1).next((err, user) => {
-        if (user && bcrypt.compareSync(password, user.password)) {
-          cb(null, user.user);
-        } else {
-          cb("bad credentials", null);
-        }
-        return "test2";
-      });
-
+      db.collection("users").find({ "user.handle": new RegExp(handle, "i") })
+        .limit(1)
+        .next((err, user) => {
+          if (user && bcrypt.compareSync(password, user.password)) {
+            cb(null, user.user);
+          } else {
+            cb("bad credentials", null);
+          }
+          return "test2";
+        });
     }
   };
-}
+};

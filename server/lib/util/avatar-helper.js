@@ -4,9 +4,9 @@ module.exports = {
   generateAvatars: (handle) => {
     const avatarUrlPrefix = `https://vanillicon.com/${md5(handle)}`;
     return {
-      small:   `${avatarUrlPrefix}_50.png`,
+      small: `${avatarUrlPrefix}_50.png`,
       regular: `${avatarUrlPrefix}.png`,
-      large:   `${avatarUrlPrefix}_200.png`
+      large: `${avatarUrlPrefix}_200.png`
     };
   }
-}
+};

@@ -11,11 +11,10 @@ function logoutButton (event) {
       $(".compose").toggle();
       $(".liked").removeClass("liked");
       $.data(document.body, "handle", null);
-
     }
   });
 }
 
 $(() => {
-  $(".logout").click(logoutButton)
+  $(".logout").click(logoutButton);
 });
