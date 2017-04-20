@@ -34,7 +34,8 @@ function createTweetElement (input) {
   const $likes = $("<li>").addClass("like-count").text(input.likes.length);
   // TODO replace jeff with user
   if (input.likes.find((element) => {
-    return element === "jeff";
+    console.log(element, $.data(document.body, "handle"));
+    return element === $.data(document.body, "handle");
   })) {
     $heart.addClass("liked");
   }
@@ -51,9 +52,9 @@ function checkLogin () {
     method: "GET",
     success: function(data) {
       if (data) {
-        console.log(data);
         $("nav a, .logged-in-label").toggle(0);
         $(".logged-in").text(data).toggle(0);
+        $.data(document.body, "handle", data);
       }
     },
     error: function(err) {
@@ -123,36 +124,39 @@ function composeButton (event) {
 }
 
 function likeButton (event) {
-  const val = $(this).hasClass("liked") ? "" : 1;
-  const liked = () => {
-    $(this).toggleClass("liked");
-    let newLikes;
-    const $counter = $(this).siblings(".like-count");
-    if ($(this).hasClass("liked")) {
-      newLikes = parseInt($counter.text(), 10) + 1;
-    } else {
-      newLikes = parseInt($counter.text(), 10) - 1;
-    }
-    $counter.text(newLikes);
-  }
-  const tweetId = $(this).closest("article").data("tweet-id");
-  $.ajax({
-    url: "/tweets/",
-    method: "PUT",
-    data: {
-      like: {
-        like: val,
-        id: tweetId,
-        handle: "jeff"
+  const poster = $(this).closest("article").find("p").first().text()
+  if ($.data(document.body, "handle") && poster !== $.data(document.body, "handle")) {
+    const val = $(this).hasClass("liked") ? "" : 1;
+    const liked = () => {
+      $(this).toggleClass("liked");
+      let newLikes;
+      const $counter = $(this).siblings(".like-count");
+      if ($(this).hasClass("liked")) {
+        newLikes = parseInt($counter.text(), 10) + 1;
+      } else {
+        newLikes = parseInt($counter.text(), 10) - 1;
       }
-    },
-    success: liked
-  });
+      $counter.text(newLikes);
+    }
+    const tweetId = $(this).closest("article").data("tweet-id");
+    $.ajax({
+      url: "/tweets/",
+      method: "PUT",
+      data: {
+        like: {
+          like: val,
+          id: tweetId,
+          handle: "jeff"
+        }
+      },
+      success: liked
+    });
+  }
 }
 
 $(document).ready(function() {
+  checkLogin();
   loadTweets();
   $(".compose").click(composeButton);
   $("input[value='Tweet']").click(postTweet);
-  checkLogin();
 });

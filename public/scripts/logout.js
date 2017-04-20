@@ -8,6 +8,8 @@ function logoutButton (event) {
         $(".login, .register").toggle();
       });
       $(".compose, .logged-in, .logged-in-label").toggle();
+      $(".liked").removeClass("liked");
+      $.data(document.body, "handle", null);
 
     }
   });

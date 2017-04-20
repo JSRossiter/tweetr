@@ -37,8 +37,13 @@ module.exports = function makeDataHelpers(db) {
       callback(null, true);
     },
 
-    getLikedTweets: function(handle) {
-      db.collection("tweets").find({ "likes": handle })
+    getLikedTweets: function(handle, cb) {
+      db.collection("tweets").find({ "likes": handle }).toArray((err, tweets) => {
+        if (err) {
+          return cb(err);
+        }
+        cb(null, tweets);
+      })
     }
   };
 }
