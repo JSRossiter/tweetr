@@ -45,6 +45,29 @@ function createTweetElement (input) {
   return $tweet;
 }
 
+function checkLogin () {
+  $.ajax({
+    url: "login",
+    method: "GET",
+    success: function(data) {
+      if (data) {
+        console.log(data);
+        $("nav a, .logged-in-label").toggle(0);
+        $(".logged-in").text(data).toggle(0);
+      }
+    },
+    error: function(err) {
+      // logout
+      $.ajax({
+        url: "/logout",
+        method: "POST",
+        success: function () {
+        }
+      });
+    }
+  });
+}
+
 function renderTweets (tweets) {
   $("article").remove();
   for (var i = 0; i < tweets.length; i++) {
@@ -131,4 +154,5 @@ $(document).ready(function() {
   loadTweets();
   $(".compose").click(composeButton);
   $("input[value='Tweet']").click(postTweet);
+  checkLogin();
 });

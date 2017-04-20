@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
+    <title>Tweeter - Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- External CSS -->
@@ -11,15 +11,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/register.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
     <!-- App JS -->
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/logout.js"></script>
-    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+    <script type="text/javascript" src="/scripts/register.js"></script>
   </head>
 
   <body>
@@ -27,28 +25,21 @@
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
-      <span class="header">Tweeter</span>
-      <a class="logout btn" href=""><i class="fa fa-sign-out"></i><span class="nav-btn-text">Logout</span></a>
-      <a class="compose btn" href=""><i class="fa fa-pencil-square-o"></i><span class="nav-btn-text"> Compose</span></a>
+      <a href="/"><span class="header">Tweeter</span></a>
       <a class="login btn" href="/login.html"><i class="fa fa-sign-in"></i><span class="nav-btn-text">Login</span></a>
       <a class="register btn" href="/register.html"><i class="fa fa-user-plus"></i><span class="nav-btn-text">Register</span></a>
-      <span class="logged-in"></span>
-      <span class="nav-btn-text logged-in-label">Logged in as</span>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form action="/tweets/" method="POST">
-          <textarea name="text" placeholder="What are you humming about?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="counter">140</span>
-        </form>
-      </section>
-
-      <div id="tweets-container">
-      </div>
+      <form action="/register" method="POST">
+        <fieldset>
+          <label>Name:<input type="text" name="name" placeholder="Jane Doe"></label>
+          <label>Handle:<input type="text" name="handle" placeholder="@JaneD82"></label>
+          <label>Password:<input type="password" name="password" placeholder="Enter your password"></label>
+          <input type="submit" name="submit">
+        </fieldset>
+      </form>
     </main>
 
   </body>

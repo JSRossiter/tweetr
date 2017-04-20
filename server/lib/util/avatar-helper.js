@@ -7,6 +7,6 @@ module.exports = {
       small:   `${avatarUrlPrefix}_50.png`,
       regular: `${avatarUrlPrefix}.png`,
       large:   `${avatarUrlPrefix}_200.png`
-    }
-  };
+    };
+  }
 }
