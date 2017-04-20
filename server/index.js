@@ -9,7 +9,13 @@ const bodyParser    = require("body-parser");
 const app           = express();
 const {MongoClient} = require("mongodb");
 const MONGODB_URI   = process.env.MONGODB_URI;
+const cookieSession = require('cookie-session');
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['its_a_secret'],
+  maxAge: 24 * 60 * 60 * 1000
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -30,8 +36,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   }
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
   const DataHelpers = require("./lib/data-helpers.js")(db);
-  const tweetsRoutes = require("./routes/tweets")(DataHelpers);
+  const UserHelpers = require(".lib/user-helpers.js")(db);
+  const tweetsRoutes = require("./routes/tweets")(DataHelpers, UserHelpers);
+  const loginRoutes = require("./routes/login")(UserHelpers);
   app.use("/tweets", tweetsRoutes);
+  app.use("/", loginRoutes);
 });
 // The `tweets-routes` module works similarly: we pass it the `DataHelpers` object
 // so it can define routes that use it to interact with the data layer.

@@ -6,7 +6,7 @@ const {generateTweetId} = require("../lib/util/generate-tweet-id");
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
-module.exports = function(DataHelpers) {
+module.exports = function(DataHelpers, UserHelpers) {
 
   tweetsRoutes.get("/", function(req, res) {
     DataHelpers.getTweets((err, tweets) => {

@@ -78,11 +78,13 @@ nav {
   .compose-text {
     display: none; }
 
-  nav a {
-    padding: 4px 3px 0 8px;
-    margin: 16px 0;
-    font-size: 36px;
-    border-radius: 10px; } }
+  nav {
+    padding: 0 1em; }
+    nav a {
+      padding: 4px 3px 0 8px;
+      margin: 16px 0;
+      font-size: 36px;
+      border-radius: 10px; } }
 .counter {
   float: right;
   font-size: 0.8em;
@@ -96,7 +98,8 @@ section {
   background-color: #EEEEEE;
   margin: 0 2em;
   border-radius: 5px;
-  padding: 10px; }
+  padding: 10px;
+  display: none; }
   section h2 {
     border-bottom: 1px solid black;
     margin: 0; }
