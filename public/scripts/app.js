@@ -52,7 +52,8 @@ function checkLogin () {
     method: "GET",
     success: function(data) {
       if (data) {
-        $("nav a, .logged-in-label").toggle(0);
+        $("nav a").toggle(0);
+        $(".logged-in-label").text("Logged in as");
         $(".logged-in").text(data).toggle(0);
         $.data(document.body, "handle", data);
       }

@@ -45,14 +45,18 @@ nav {
     display: none;
   }
 
+  .logged-in {
+    display: none;
+  }
+
   .logged-in, .logged-in-label {
     font-size: 1.3em;
     color: #E8FDFF;
     line-height: 80px;
     float: right;
     padding-left: 3px;
-    display: none;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -61,7 +65,7 @@ nav {
   }
   nav {
     padding: 0 1em;
-    a {
+    .btn {
       padding: 4px 4px 0 8px;
       margin: 16px 0 16px 5px;
       font-size: 36px;
