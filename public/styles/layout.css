@@ -74,7 +74,7 @@ nav {
     background-color: white;
     color: black; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .compose-text {
     display: none; }
 
@@ -106,7 +106,7 @@ textarea {
   margin-top: 1em;
   padding: 5px; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   section {
     margin: 0;
     border-radius: 0; } }
@@ -166,7 +166,7 @@ header {
   #tweets-container article:hover, #tweets-container article:hover .tweet-icons li {
     opacity: 1; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #tweets-container article {
     margin: 0;
     opacity: 1;
