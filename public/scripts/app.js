@@ -1,9 +1,3 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
 function likeButton (event) {
   const poster = $(this).closest("article").find("p").first().text();
   if ($.data(document.body, "handle") && poster !== $.data(document.body, "handle")) {
@@ -88,13 +82,27 @@ function checkLogin () {
       }
     },
     error: function(err) {
-      // logout
       $.ajax({
         url: "/logout",
         method: "POST"
-        // success: function () {
-        // }
       });
+    }
+  });
+}
+
+function logoutButton (event) {
+  event.preventDefault();
+  $.ajax({
+    url: "/logout",
+    method: "POST",
+    success: function () {
+      $(".logout").toggle(() => {
+        $(".login, .register").toggle();
+      });
+      $(".logged-in-label, .logged-in").text("");
+      $(".compose").toggle();
+      $(".liked").removeClass("liked");
+      $.data(document.body, "handle", null);
     }
   });
 }
@@ -140,7 +148,6 @@ function postTweet (event) {
       data: $tweet.serialize(),
       success: function (data) {
         renderTweets([data]);
-        // loadTweets();
         $tweet[0].value = "";
         $(".counter").text(140);
       }
@@ -162,4 +169,5 @@ $(document).ready(function() {
   loadTweets();
   $(".compose").click(composeButton);
   $("input[value='Tweet']").click(postTweet);
+  $(".logout").click(logoutButton);
 });
