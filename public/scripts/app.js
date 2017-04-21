@@ -15,12 +15,11 @@ function likeButton (event) {
     };
     const tweetId = $(this).closest("article").data("tweet-id");
     $.ajax({
-      url: "/tweets/",
+      url: `/tweets/${tweetId}`,
       method: "PUT",
       data: {
         like: {
           like: val,
-          id: tweetId,
           handle: "jeff"
         }
       },
@@ -171,7 +170,7 @@ function composeButton (event) {
     });
   } else {
     $(".new-tweet").slideDown(0, function() {
-      $("body").stop().animate({scrollTop:0}, '500', 'swing', function() {
+      $("body").stop().animate({scrollTop: 0}, '500', 'swing', function() {
         $(".new-tweet textarea").focus();
       });
     });

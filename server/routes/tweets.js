@@ -19,25 +19,7 @@ module.exports = function(DataHelpers, UserHelpers) {
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
-      })
-
-
-
-
-
-
-
-
-
-
-
-    // DataHelpers.getTweets((err, tweets) => {
-    //   if (err) {
-    //     res.status(500).json({ error: err.message });
-    //   } else {
-    //     res.json(tweets);
-    //   }
-    // });
+      });
   });
 
   tweetsRoutes.post("/", function(req, res) {
@@ -65,10 +47,10 @@ module.exports = function(DataHelpers, UserHelpers) {
     });
   });
 
-  tweetsRoutes.put("/", function(req, res) {
+  tweetsRoutes.put("/:id", function(req, res) {
     if (req.body.like) {
       if (req.body.like.like) {
-        DataHelpers.likeTweet(req.body.like.id, req.session.handle, (err) => {
+        DataHelpers.likeTweet(req.params.id, req.session.handle, (err) => {
           if (err) {
             res.status(500).json({ error: err.message });
           } else {
@@ -76,7 +58,7 @@ module.exports = function(DataHelpers, UserHelpers) {
           }
         });
       } else {
-        DataHelpers.unlikeTweet(req.body.like.id, req.session.handle, (err) => {
+        DataHelpers.unlikeTweet(req.params.id, req.session.handle, (err) => {
           if (err) {
             res.status(500).json({ error: err.message });
           } else {
