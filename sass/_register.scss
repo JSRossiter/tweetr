@@ -24,14 +24,7 @@
     margin: 0px auto;
     padding: 0;
   }
-}
-
-@media (max-width: 768px) {
-  main.container {
-    width: 100%;
-    padding-top: 80px;
-  }
-  .form-container {
+  @media (max-width: 768px) {
     fieldset {
       width: 100%;
     }
@@ -43,3 +36,4 @@
     }
   }
 }
+

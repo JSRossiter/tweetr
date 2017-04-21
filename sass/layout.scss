@@ -14,12 +14,19 @@ html {
 /*
  * Global layout stuff
  */
+/* global variables */
+$primary-color: #00A087;
+$secondary-color: #E8FDFF;
+$bg-grey: #EEE;
+$border-grey: #D6D6D6;
+$nav-height: 80px;
+
 
 
 body {
   margin: 0;
   color: #244751;
-  background-color: #eee;
+  background-color: $bg-grey;
 }
 
 main.container {
@@ -39,7 +46,7 @@ main.container {
   margin: 1px 0 0 5px;
   padding: 2px;
   border-radius: 3px;
-  border: 1px solid #D6D6D6;
+  border: 1px solid $border-grey;
 
 }
 

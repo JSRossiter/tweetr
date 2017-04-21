@@ -1,9 +1,9 @@
 nav {
-  background-color: #00a087;
+  background-color: $primary-color;
   position: fixed;
   padding: 0 2em;
   width: 100%;
-  height: 80px;
+  height: $nav-height;
   z-index: 10;
 
   a {
@@ -13,32 +13,31 @@ nav {
   .header {
     float: left;
     font-size: 2em;
-    color: #E8FDFF;
+    color: $secondary-color;
     padding: 0 10px;
-    line-height: 80px;
+    line-height: $nav-height;
   }
 
   .logo {
     float: left;
-    height: 80px;
-    width: 80px;
+    height: $nav-height;
+    width: $nav-height;
   }
 
   .btn {
     padding: 15px 10px;
     float: right;
     margin: 10px 0 10px 10px;
-    background-color: #E8FDFF;
-    color: #00a087;
+    background-color: $secondary-color;
+    color: $primary-color;
     border-radius: 5px;
     border: 1px solid black;
     text-decoration: none;
     font-size: 24px;
-  }
-
-  .btn:hover {
-    background-color: white;
-    color: black;
+    &:hover {
+      background-color: white;
+      color: black;
+    }
   }
 
   .compose, .logout {
@@ -47,20 +46,16 @@ nav {
 
   .logged-in, .logged-in-label {
     font-size: 1.3em;
-    color: #E8FDFF;
-    line-height: 80px;
+    color: $secondary-color;
+    line-height: $nav-height;
     float: right;
     padding-left: 3px;
   }
-
-}
-
-@media (max-width: 768px) {
-  .nav-btn-text, .logged-in {
-    display: none;
-  }
-  nav {
+  @media (max-width: 768px) {
     padding: 0 1em;
+    .nav-btn-text, .logged-in {
+      display: none;
+    }
     .btn {
       padding: 4px 4px 0 8px;
       margin: 16px 0 16px 5px;
