@@ -161,13 +161,22 @@ function postTweet (event) {
   }
 }
 
+// TODO show compose button if not on
 function composeButton (event) {
   event.preventDefault();
-  $(".new-tweet").slideToggle(function() {
-    if (!$(".new-tweet").is(":hidden")) {
-      $(".new-tweet textarea").focus();
-    }
-  });
+  if ($(window).scrollTop() === 0) {
+    $(".new-tweet").slideToggle(function() {
+      if (!$(".new-tweet").is(":hidden")) {
+        $(".new-tweet textarea").focus();
+      }
+    });
+  } else {
+    $(".new-tweet").slideDown(0, function() {
+      $("body").stop().animate({scrollTop:0}, '500', 'swing', function() {
+        $(".new-tweet textarea").focus();
+      });
+    });
+  }
 }
 
 function loginNavButton (event) {
