@@ -75,7 +75,7 @@ function checkLogin () {
     method: "GET",
     success: function(data) {
       if (data) {
-        $("nav a").toggle(0);
+        $("nav .btn").toggle(0);
         $(".logged-in-label").text("Logged in as");
         $(".logged-in").text(data);
         $.data(document.body, "handle", data);
@@ -90,6 +90,11 @@ function checkLogin () {
   });
 }
 
+// TODO refactor ajax calls
+// function doRequest() {
+//   return $.ajax(url, method, data)
+// }
+
 function logoutButton (event) {
   event.preventDefault();
   $.ajax({
@@ -103,6 +108,7 @@ function logoutButton (event) {
       $(".compose").toggle();
       $(".liked").removeClass("liked");
       $.data(document.body, "handle", null);
+      $(".new-tweet").slideUp();
     }
   });
 }
@@ -164,10 +170,57 @@ function composeButton (event) {
   });
 }
 
+function loginNavButton (event) {
+  event.preventDefault();
+  $("#tweets-container, .form-container").empty();
+  $(".new-tweet").slideUp(() => {
+    $(".form-container").append($(`
+      <form action="/login" method="POST">
+        <fieldset>
+          <label>Handle:<input type="text" name="handle" placeholder="@JaneD82"></label><br>
+          <label>Password:<input type="password" name="password" placeholder="Enter your password"></label><br>
+          <input type="submit" name="submit" value="Login">
+        </fieldset>
+      </form>`));
+  });
+}
+
+function loginButton (event) {
+// some ajax with success = load tweets
+}
+
+function registerNavButton (event) {
+  event.preventDefault();
+  $("#tweets-container, .form-container").empty();
+  $(".new-tweet").slideUp(() => {
+    $(".form-container").append($(`
+      <form action="/register" method="POST">
+        <fieldset>
+          <label>Name:<input type="text" name="name" placeholder="Jane Doe"></label>
+          <label>Handle:<input type="text" name="handle" placeholder="@JaneD82"></label>
+          <label>Password:<input type="password" name="password" placeholder="Enter your password"></label>
+          <input type="submit" name="submit" value="Register">
+        </fieldset>
+      </form>`));
+  });
+}
+
+function registerButton (event) {
+  // some ajax with success = load tweets + empty .form-container
+}
+
+function homeButton (event) {
+  event.preventDefault();
+  loadTweets();
+}
+
 $(document).ready(function() {
   checkLogin();
   loadTweets();
   $(".compose").click(composeButton);
   $("input[value='Tweet']").click(postTweet);
   $(".logout").click(logoutButton);
+  $(".register").click(registerNavButton);
+  $(".login").click(loginNavButton);
+  $(".home-btn").click(homeButton);
 });

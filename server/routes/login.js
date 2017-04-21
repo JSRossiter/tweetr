@@ -1,6 +1,5 @@
 "use strict";
 
-
 const express       = require('express');
 const loginRoutes  = express.Router();
 
@@ -38,7 +37,7 @@ module.exports = function(UserHelpers) {
         }
       });
     } else {
-      res.status(200);
+      res.status(200).send();
     }
   });
 

@@ -190,5 +190,35 @@ header {
 
   .tweet-icons li {
     opacity: 1; } }
+.form-container label {
+  display: inline-block;
+  width: 400px;
+  text-align: right;
+  font-size: 1.5em; }
+.form-container input[type="text"], .form-container input[type="password"] {
+  width: 275px;
+  margin: 20px 0 0 10px;
+  padding: 5px; }
+.form-container input[type="submit"] {
+  margin: 20px auto;
+  display: block;
+  font-size: 1.5em; }
+.form-container fieldset {
+  border: none;
+  width: 450px;
+  margin: 0px auto;
+  padding: 0; }
+
+@media (max-width: 768px) {
+  main.container {
+    width: 100%;
+    padding-top: 80px; }
+
+  .form-container fieldset {
+    width: 100%; }
+  .form-container input[type="text"], .form-container input[type="password"] {
+    width: 60%; }
+  .form-container label {
+    width: 90%; } }
 
 /*# sourceMappingURL=layout.css.map */
