@@ -161,7 +161,6 @@ function postTweet (event) {
   }
 }
 
-// TODO show compose button if not on
 function composeButton (event) {
   event.preventDefault();
   if ($(window).scrollTop() === 0) {
@@ -195,7 +194,16 @@ function loginNavButton (event) {
 }
 
 function loginButton (event) {
-// some ajax with success = load tweets
+  event.preventDefault();
+  $.ajax({
+    url: "/login",
+    method: "POST",
+    data: $("form").serialize(),
+    success: function (data) {
+      $(".form-container").empty();
+      loadTweets();
+    }
+  });
 }
 
 function registerNavButton (event) {
@@ -215,7 +223,16 @@ function registerNavButton (event) {
 }
 
 function registerButton (event) {
-  // some ajax with success = load tweets + empty .form-container
+  event.preventDefault();
+  $.ajax({
+    url: "/register",
+    method: "POST",
+    data: $("form").serialize(),
+    success: function (data) {
+      $(".form-container").empty();
+      loadTweets();
+    }
+  });
 }
 
 function homeButton (event) {
@@ -232,4 +249,6 @@ $(document).ready(function() {
   $(".register").click(registerNavButton);
   $(".login").click(loginNavButton);
   $(".home-btn").click(homeButton);
+  $("input[value='Login']").click(loginButton);
+  $("input[value='Register']").click(registerButton);
 });
